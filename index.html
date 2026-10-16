@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Risk No Roadster ($ROADSTER)</title>
+  <meta name="description" content="No Risk No Roadster. For everyone who knows the best things in life start with a little conviction and a full tank of memes. $ROADSTER on Solana.">
+  <meta name="theme-color" content="#030806">
+  <link rel="icon" href="logo.jpg">
+  <link rel="preload" as="image" href="banner.png">
+  <link rel="preload" as="image" href="logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&family=Russo+One&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            void: "#030806",
+            neon: "#7CFF3C",
+            volt: "#C8FF6A",
+            beam: "#B8FFF2",
+            mist: "#E7F5E4",
+            pine: "#102416"
+          },
+          fontFamily: {
+            display: ['"Russo One"', "sans-serif"],
+            hud: ["Orbitron", "sans-serif"],
+            body: ["Outfit", "sans-serif"],
+            mono: ['"Share Tech Mono"', "ui-monospace", "monospace"]
+          },
+          boxShadow: {
+            glow: "0 0 32px rgba(124, 255, 60, 0.35)"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --neon: #7cff3c;
+      --beam: #b8fff2;
+    }
+
+    ::selection {
+      background: var(--neon);
+      color: #041404;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #030806;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #1d4a22;
+      border: 2px solid #030806;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--neon);
+    }
+
+    .hud {
+      background:
+        linear-gradient(var(--neon), var(--neon)) left top / 16px 2px no-repeat,
+        linear-gradient(var(--neon), var(--neon)) left top / 2px 16px no-repeat,
+        linear-gradient(var(--neon), var(--neon)) right top / 16px 2px no-repeat,
+        linear-gradient(var(--neon), var(--neon)) right top / 2px 16px no-repeat,
+        linear-gradient(var(--neon), var(--neon)) left bottom / 16px 2px no-repeat,
+        linear-gradient(var(--neon), var(--neon)) left bottom / 2px 16px no-repeat,
+        linear-gradient(var(--neon), var(--neon)) right bottom / 16px 2px no-repeat,
+        linear-gradient(var(--neon), var(--neon)) right bottom / 2px 16px no-repeat,
+        linear-gradient(180deg, rgba(6, 18, 9, 0.82), rgba(3, 8, 6, 0.78));
+      border: 1px solid rgba(124, 255, 60, 0.2);
+      backdrop-filter: blur(16px);
+    }
+
+    .text-glow {
+      text-shadow: 0 0 18px rgba(124, 255, 60, 0.55), 0 0 2px rgba(124, 255, 60, 0.9);
+    }
+
+    .drl {
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--beam), #fff, var(--neon), transparent);
+      box-shadow: 0 0 16px var(--beam), 0 0 32px rgba(124, 255, 60, 0.65);
+    }
+
+    .logo-idle {
+      animation: idle 3.4s ease-in-out infinite;
+    }
+
+    .live-dot {
+      animation: blink 1.6s ease-in-out infinite;
+    }
+
+    .marquee-track {
+      animation: marquee 32s linear infinite;
+    }
+
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    .road::before {
+      content: "";
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: repeating-linear-gradient(90deg, var(--neon) 0 26px, transparent 26px 48px);
+      filter: drop-shadow(0 0 6px var(--neon));
+      animation: drive 0.9s linear infinite;
+    }
+
+    .btn-go {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .btn-go::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+      transform: translateX(-130%);
+    }
+
+    .btn-go:hover::after {
+      animation: sheen 0.7s ease;
+    }
+
+    .reflect {
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent 80%);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent 80%);
+    }
+
+    .is-copied {
+      background: var(--beam) !important;
+      color: #041404 !important;
+    }
+
+    @keyframes idle {
+      0%, 100% { box-shadow: 0 0 28px rgba(124, 255, 60, 0.28), 0 20px 50px rgba(0, 0, 0, 0.45); }
+      50% { box-shadow: 0 0 52px rgba(124, 255, 60, 0.55), 0 20px 50px rgba(0, 0, 0, 0.45); }
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    @keyframes marquee {
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes drive {
+      to { background-position: 48px 0; }
+    }
+
+    @keyframes sheen {
+      to { transform: translateX(130%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .logo-idle,
+      .live-dot,
+      .marquee-track,
+      .road::before,
+      .btn-go::after {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-void font-body text-mist antialiased">
+  <div class="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('banner.png')"></div>
+    <div class="absolute inset-0 bg-[#030806]/75"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[#030806]/85 via-[#030806]/35 to-[#030806]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_15%,rgba(124,255,60,0.2),transparent_46%)]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_10%_80%,rgba(184,255,242,0.08),transparent_40%)]"></div>
+  </div>
+
+  <header class="sticky top-0 z-50 border-b border-neon/20 bg-[#030806]/75 backdrop-blur-xl">
+    <div class="drl"></div>
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3">
+      <a href="#top" class="flex items-center gap-3">
+        <img src="logo.jpg" alt="No Risk No Roadster logo" class="h-11 w-11 rounded-md object-cover ring-1 ring-neon/60">
+        <span class="leading-none">
+          <span class="block font-hud text-[10px] tracking-[0.32em] text-neon">SOLANA</span>
+          <span class="block font-display text-lg tracking-wide text-white">ROADSTER</span>
+        </span>
+      </a>
+
+      <nav class="hidden items-center gap-8 font-hud text-[11px] tracking-[0.22em] text-mist/80 md:flex" aria-label="Primary">
+        <a href="#story" class="transition hover:text-neon">STORY</a>
+        <a href="#how-to-buy" class="transition hover:text-neon">HOW TO BUY</a>
+        <a href="#chart" class="transition hover:text-neon">CHART</a>
+      </nav>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="https://t.me/NoRiskRoadster" target="_blank" rel="noopener noreferrer" class="hidden transition hover:scale-105 sm:block" aria-label="Telegram">
+          <img src="tg.png" alt="" class="h-9 w-9 rounded-full object-cover ring-1 ring-white/20">
+        </a>
+        <a href="https://x.com/NoRiskRoadster" target="_blank" rel="noopener noreferrer" class="hidden transition hover:scale-105 sm:block" aria-label="X">
+          <img src="x.png" alt="" class="h-9 w-9 rounded-full object-cover ring-1 ring-white/30">
+        </a>
+        <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&amp;output=TBA" target="_blank" rel="noopener noreferrer" class="btn-go bg-neon px-4 py-2 font-hud text-[11px] tracking-[0.18em] text-void transition hover:bg-volt hover:shadow-glow sm:px-5">
+          BUY NOW
+        </a>
+        <button type="button" class="inline-flex h-10 w-10 items-center justify-center border border-neon/40 text-neon md:hidden" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-neon/20 bg-[#030806]/95 px-5 py-4 md:hidden" data-menu>
+      <nav class="flex flex-col gap-4 font-hud text-xs tracking-[0.22em]" aria-label="Mobile">
+        <a href="#story" class="hover:text-neon">STORY</a>
+        <a href="#how-to-buy" class="hover:text-neon">HOW TO BUY</a>
+        <a href="#chart" class="hover:text-neon">CHART</a>
+        <div class="flex items-center gap-3 pt-1">
+          <a href="https://t.me/NoRiskRoadster" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+            <img src="tg.png" alt="" class="h-10 w-10 rounded-full object-cover">
+          </a>
+          <a href="https://x.com/NoRiskRoadster" target="_blank" rel="noopener noreferrer" aria-label="X">
+            <img src="x.png" alt="" class="h-10 w-10 rounded-full object-cover ring-1 ring-white/30">
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-16 pt-14 lg:grid-cols-12 lg:pb-24 lg:pt-20">
+      <div class="order-2 lg:order-1 lg:col-span-7">
+        <p class="mb-5 inline-flex items-center gap-2 border border-neon/30 bg-black/40 px-3 py-1 font-hud text-[10px] tracking-[0.28em] text-neon">
+          <span class="live-dot h-1.5 w-1.5 rounded-full bg-neon shadow-[0_0_8px_#7CFF3C]"></span>
+          $ROADSTER · ELECTRIC MEME
+        </p>
+        <h1 class="font-display leading-[0.88] text-white" style="font-size: clamp(3rem, 8vw, 7.25rem)">
+          NO RISK<br>
+          <span class="text-glow text-neon">NO ROADSTER</span>
+        </h1>
+        <p class="mt-6 max-w-xl text-lg font-light leading-relaxed text-mist/90 sm:text-xl">
+          No Risk No Roadster. For everyone who knows the best things in life start with a little conviction and a full tank of memes.
+        </p>
+
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&amp;output=TBA" target="_blank" rel="noopener noreferrer" class="btn-go inline-flex items-center justify-center gap-3 bg-neon px-8 py-4 font-hud text-sm tracking-[0.2em] text-void transition hover:bg-volt hover:shadow-glow">
+            BUY NOW
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6"></path>
+            </svg>
+          </a>
+          <a href="https://dexscreener.com/solana/TBA" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center border border-neon/70 px-8 py-4 font-hud text-sm tracking-[0.2em] text-neon transition hover:bg-neon hover:text-void">
+            CHART
+          </a>
+        </div>
+
+        <div class="mt-8 max-w-xl border-2 border-neon/80 bg-black/70 px-4 py-3 shadow-glow">
+          <div class="mb-1 flex items-center justify-between font-hud text-[10px] tracking-[0.28em] text-beam">
+            <span>SOLANA</span>
+            <span>CONTRACT</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <code id="ca-hero" class="min-w-0 flex-1 truncate font-mono text-xl tracking-[0.28em] text-neon sm:text-2xl">TBA</code>
+            <button type="button" data-copy class="shrink-0 border border-neon bg-neon/10 px-4 py-2 font-hud text-[11px] tracking-[0.18em] text-neon transition hover:bg-neon hover:text-void" aria-label="Copy contract address">
+              <span data-copy-label>COPY</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-6 flex items-center gap-3">
+          <a href="https://t.me/NoRiskRoadster" target="_blank" rel="noopener noreferrer" class="transition hover:scale-105" aria-label="Telegram">
+            <img src="tg.png" alt="" class="h-11 w-11 rounded-full object-cover ring-2 ring-black">
+          </a>
+          <a href="https://x.com/NoRiskRoadster" target="_blank" rel="noopener noreferrer" class="transition hover:scale-105" aria-label="X">
+            <img src="x.png" alt="" class="h-11 w-11 rounded-full object-cover ring-2 ring-white/20">
+          </a>
+          <span class="font-hud text-[10px] tracking-[0.22em] text-mist/60">PULL UP. TALK SHOP.</span>
+        </div>
+      </div>
+
+      <div class="order-1 lg:order-2 lg:col-span-5">
+        <div class="relative mx-auto max-w-md">
+          <div class="absolute -inset-8 -z-10 bg-[radial-gradient(circle,rgba(124,255,60,0.28),transparent_68%)] blur-2xl" aria-hidden="true"></div>
+          <img src="logo.jpg" alt="A cat at the wheel of a white roadster, neon candles in the dark" class="logo-idle relative w-full rounded-2xl border border-neon/50 object-cover" width="800" height="800">
+          <div class="drl mt-4"></div>
+          <img src="logo.jpg" alt="" aria-hidden="true" class="reflect pointer-events-none mx-auto mt-1 h-16 w-[86%] object-cover object-bottom opacity-50">
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee overflow-hidden border-y border-neon/30 bg-black/60 py-3" aria-hidden="true">
+      <div class="marquee-track flex w-max whitespace-nowrap font-hud text-xs tracking-[0.35em] text-neon">
+        <span class="px-4">NO RISK NO ROADSTER ✦ A LITTLE CONVICTION ✦ A FULL TANK OF MEMES ✦ $ROADSTER ✦ SOLANA ✦ FLOOR IT ✦</span>
+        <span class="px-4">NO RISK NO ROADSTER ✦ A LITTLE CONVICTION ✦ A FULL TANK OF MEMES ✦ $ROADSTER ✦ SOLANA ✦ FLOOR IT ✦</span>
+      </div>
+    </div>
+
+    <section id="story" class="scroll-mt-24 mx-auto max-w-7xl px-5 py-20 lg:py-28">
+      <div class="grid items-center gap-10 lg:grid-cols-2">
+        <div class="hud p-7 sm:p-10">
+          <p class="font-hud text-[11px] tracking-[0.32em] text-neon">01 — THE DRIVE</p>
+          <h2 class="mt-4 font-display text-4xl leading-none text-white sm:text-5xl">Conviction in the tank.</h2>
+          <p class="mt-6 text-lg font-light leading-relaxed text-mist/85">
+            No Risk No Roadster is for everyone who knows the best things in life start with a little conviction and a full tank of memes. A white roadster. A cat on the wheel. Green candles for headlights. The symbol is <span class="font-semibold text-neon">$ROADSTER</span>, and the road is Solana.
+          </p>
+          <blockquote class="mt-6 border-l-2 border-neon pl-4 text-xl text-white">
+            “The best things in life start with a little conviction and a full tank of memes.”
+          </blockquote>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <article class="hud p-5">
+            <p class="font-hud text-[10px] tracking-[0.28em] text-beam">TICKER</p>
+            <p class="mt-3 font-display text-3xl text-neon">$ROADSTER</p>
+            <p class="mt-2 text-sm text-mist/70">The symbol on the plate. Say it like you mean the launch.</p>
+          </article>
+          <article class="hud p-5">
+            <p class="font-hud text-[10px] tracking-[0.28em] text-beam">NETWORK</p>
+            <p class="mt-3 font-display text-3xl text-white">SOLANA</p>
+            <p class="mt-2 text-sm text-mist/70">Fast lane fees. SOL is the fuel in the tank.</p>
+          </article>
+          <article class="hud p-5">
+            <p class="font-hud text-[10px] tracking-[0.28em] text-beam">CONVICTION</p>
+            <div class="mt-4 h-2 bg-white/10">
+              <div class="h-full w-full bg-neon shadow-[0_0_12px_#7CFF3C]"></div>
+            </div>
+            <p class="mt-3 font-hud text-[10px] tracking-[0.22em] text-neon">FULL</p>
+          </article>
+          <article class="hud p-5">
+            <p class="font-hud text-[10px] tracking-[0.28em] text-beam">MEME TANK</p>
+            <div class="mt-4 h-2 bg-white/10">
+              <div class="h-full w-full bg-beam shadow-[0_0_12px_#B8FFF2]"></div>
+            </div>
+            <p class="mt-3 font-hud text-[10px] tracking-[0.22em] text-beam">FULL</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="road mx-auto max-w-5xl px-5" aria-hidden="true"></div>
+
+    <section id="how-to-buy" class="scroll-mt-24 mx-auto max-w-7xl px-5 py-20 lg:py-28">
+      <div class="max-w-2xl">
+        <p class="font-hud text-[11px] tracking-[0.32em] text-neon">02 — LAUNCH CONTROL</p>
+        <h2 class="mt-4 font-display text-4xl leading-none text-white sm:text-6xl">How to Buy</h2>
+        <p class="mt-5 text-lg font-light leading-relaxed text-mist/85">
+          Four steps from parked to $ROADSTER. Wallet, SOL, swap, confirm. A little conviction is the only option package.
+        </p>
+      </div>
+
+      <ol class="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <li class="hud flex h-full flex-col p-6">
+          <div class="flex items-center justify-between">
+            <span class="font-hud text-sm tracking-[0.2em] text-neon">01</span>
+            <svg viewBox="0 0 24 24" class="h-7 w-7 text-beam" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <rect x="4" y="6" width="16" height="13" rx="2"></rect>
+              <path d="M8 6V5a4 4 0 0 1 8 0v1M8 12h8"></path>
+            </svg>
+          </div>
+          <h3 class="mt-6 font-display text-2xl text-white">Ignition</h3>
+          <p class="mt-3 flex-1 text-sm leading-relaxed text-mist/75">
+            Install Phantom or Solflare. Create a Solana wallet and write the recovery phrase on paper. That phrase starts the car. Keep it offline.
+          </p>
+        </li>
+        <li class="hud flex h-full flex-col p-6">
+          <div class="flex items-center justify-between">
+            <span class="font-hud text-sm tracking-[0.2em] text-neon">02</span>
+            <svg viewBox="0 0 24 24" class="h-7 w-7 text-beam" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M12 3c2 4 6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 4-7 6-11z"></path>
+            </svg>
+          </div>
+          <h3 class="mt-6 font-display text-2xl text-white">Fuel</h3>
+          <p class="mt-3 flex-1 text-sm leading-relaxed text-mist/75">
+            Buy SOL and send it to your wallet. Keep enough for the swap and a little extra for the Solana network fee. SOL is the only pump this roadster takes.
+          </p>
+        </li>
+        <li class="hud flex h-full flex-col p-6">
+          <div class="flex items-center justify-between">
+            <span class="font-hud text-sm tracking-[0.2em] text-neon">03</span>
+            <svg viewBox="0 0 24 24" class="h-7 w-7 text-beam" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M7 7h11l-3-3M17 17H6l3 3"></path>
+            </svg>
+          </div>
+          <h3 class="mt-6 font-display text-2xl text-white">Shift</h3>
+          <p class="mt-3 flex-1 text-sm leading-relaxed text-mist/75">
+            Hit Buy Now. The swap opens with SOL in and $ROADSTER out. Choose the amount. Before you sign, match the token to the contract address on this page.
+          </p>
+        </li>
+        <li class="hud flex h-full flex-col p-6">
+          <div class="flex items-center justify-between">
+            <span class="font-hud text-sm tracking-[0.2em] text-neon">04</span>
+            <svg viewBox="0 0 24 24" class="h-7 w-7 text-beam" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M4 15c2-4 4-6 8-6s6 2 8 6"></path>
+              <circle cx="7" cy="16" r="2"></circle>
+              <circle cx="17" cy="16" r="2"></circle>
+            </svg>
+          </div>
+          <h3 class="mt-6 font-display text-2xl text-white">Launch</h3>
+          <p class="mt-3 flex-1 text-sm leading-relaxed text-mist/75">
+            Approve the transaction. $ROADSTER lands in the wallet. If it stays hidden, paste the CA into the token search. Then open the chart and floor it.
+          </p>
+        </li>
+      </ol>
+
+      <div class="mt-8 flex flex-col items-start justify-between gap-4 border border-neon/20 bg-black/40 p-5 sm:flex-row sm:items-center">
+        <p class="max-w-xl text-sm text-mist/75">Copy the contract, check it on the swap, and ignore any address sent in a reply.</p>
+        <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&amp;output=TBA" target="_blank" rel="noopener noreferrer" class="btn-go inline-flex bg-neon px-6 py-3 font-hud text-xs tracking-[0.18em] text-void hover:bg-volt">
+          BUY NOW
+        </a>
+      </div>
+    </section>
+
+    <section id="chart" class="scroll-mt-24 mx-auto max-w-7xl px-5 pb-20 lg:pb-28">
+      <div class="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <div>
+          <p class="font-hud text-[11px] tracking-[0.32em] text-neon">03 — TELEMETRY</p>
+          <h2 class="mt-3 font-display text-4xl leading-none text-white sm:text-6xl">Chart</h2>
+        </div>
+        <a href="https://dexscreener.com/solana/TBA" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center border border-neon/70 px-6 py-3 font-hud text-xs tracking-[0.2em] text-neon transition hover:bg-neon hover:text-void">
+          OPEN CHART
+        </a>
+      </div>
+
+      <div class="hud p-3 sm:p-4">
+        <div class="mb-3 flex flex-col gap-3 px-2 pt-2 sm:flex-row sm:items-center sm:justify-between">
+          <div class="flex items-center gap-3">
+            <span class="live-dot h-2 w-2 rounded-full bg-neon shadow-[0_0_8px_#7CFF3C]"></span>
+            <p class="font-hud text-[11px] tracking-[0.22em] text-mist">ROADSTER / SOL · DEXSCREENER</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <code class="font-mono text-sm tracking-[0.18em] text-neon">TBA</code>
+            <button type="button" data-copy class="border border-neon/60 px-3 py-1.5 font-hud text-[10px] tracking-[0.16em] text-neon transition hover:bg-neon hover:text-void" aria-label="Copy contract address">
+              <span data-copy-label>COPY</span>
+            </button>
+          </div>
+        </div>
+        <div class="overflow-hidden border border-neon/20 bg-black">
+          <iframe
+            title="Dexscreener chart for ROADSTER"
+            src="https://dexscreener.com/solana/TBA?embed=1&amp;theme=dark&amp;trades=0&amp;info=0"
+            class="h-[460px] w-full md:h-[640px]"
+            loading="lazy"
+            allow="clipboard-write"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-5 pb-24">
+      <div class="hud relative overflow-hidden px-6 py-14 text-center sm:px-12">
+        <div class="pointer-events-none absolute inset-x-0 top-0 h-24 bg-[radial-gradient(ellipse_at_top,rgba(124,255,60,0.2),transparent_70%)]" aria-hidden="true"></div>
+        <p class="font-hud text-[11px] tracking-[0.32em] text-neon">FULL TANK</p>
+        <h2 class="mx-auto mt-4 max-w-3xl font-display text-4xl leading-none text-white sm:text-6xl">No Risk No Roadster.</h2>
+        <p class="mx-auto mt-5 max-w-2xl text-lg font-light text-mist/85">
+          For everyone who knows the best things in life start with a little conviction and a full tank of memes.
+        </p>
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&amp;output=TBA" target="_blank" rel="noopener noreferrer" class="btn-go inline-flex bg-neon px-8 py-4 font-hud text-sm tracking-[0.2em] text-void hover:bg-volt hover:shadow-glow">
+            BUY NOW
+          </a>
+          <a href="https://dexscreener.com/solana/TBA" target="_blank" rel="noopener noreferrer" class="inline-flex border border-neon/70 px-8 py-4 font-hud text-sm tracking-[0.2em] text-neon transition hover:bg-neon hover:text-void">
+            CHART
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="road" aria-hidden="true"></div>
+
+  <footer class="bg-black/70">
+    <div class="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-10 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex items-center gap-3">
+        <img src="logo.jpg" alt="" class="h-12 w-12 rounded-md object-cover ring-1 ring-neon/50">
+        <div>
+          <p class="font-display text-lg text-white">NO RISK NO ROADSTER</p>
+          <p class="font-hud text-[10px] tracking-[0.22em] text-neon">$ROADSTER · SOLANA</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://t.me/NoRiskRoadster" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          <img src="tg.png" alt="" class="h-10 w-10 rounded-full object-cover">
+        </a>
+        <a href="https://x.com/NoRiskRoadster" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <img src="x.png" alt="" class="h-10 w-10 rounded-full object-cover ring-1 ring-white/25">
+        </a>
+      </div>
+    </div>
+    <div class="border-t border-white/10">
+      <p class="mx-auto max-w-7xl px-5 py-4 text-xs leading-relaxed text-mist/50">
+        $ROADSTER is a meme on Solana. Nothing on this page is financial advice. Fan-made tribute, not affiliated with Tesla. Contract address: TBA.
+      </p>
+    </div>
+  </footer>
+
+  <p id="copy-status" class="sr-only" role="status"></p>
+
+  <script>
+    const CA = "TBA";
+    const status = document.getElementById("copy-status");
+
+    document.querySelectorAll("[data-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(CA);
+        } catch (error) {
+          const area = document.createElement("textarea");
+          area.value = CA;
+          area.setAttribute("readonly", "");
+          area.style.position = "fixed";
+          area.style.left = "-9999px";
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand("copy");
+          area.remove();
+        }
+
+        const label = button.querySelector("[data-copy-label]");
+        const previous = label.textContent;
+        label.textContent = "COPIED";
+        button.classList.add("is-copied");
+        status.textContent = "Contract address copied";
+
+        window.setTimeout(() => {
+          label.textContent = previous;
+          button.classList.remove("is-copied");
+        }, 1600);
+      });
+    });
+
+    const toggle = document.querySelector("[data-menu-toggle]");
+    const menu = document.querySelector("[data-menu]");
+
+    toggle.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+      toggle.setAttribute("aria-expanded", String(!menu.classList.contains("hidden")));
+    });
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.classList.add("hidden");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        menu.classList.add("hidden");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  </script>
+</body>
+</html>
